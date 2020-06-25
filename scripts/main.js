@@ -19,30 +19,33 @@ var g = this.canvas.getContext("2d");
 var interval = setInterval(update, 20);
 
 var p = new Player(100, 100);
+createEntity(new Badguy(500, 100));
+
+var hud = new HUD(p);
 
 // ## UPDATE AND RENDER
 
 function update() {
   p.update();
+  updateAllEntities();
 
   render();
+
+  pressedKeys = [];
 }
 
 function render() {
-  background("#CCC");
+  background("#000");
   p.show();
 
-  g.strokeStyle = "#F00";
+  showAllEntities();
+  hud.show();
 
-  g.beginPath();
-  g.moveTo(p.x, p.y);
-  g.lineTo(mouse.x, mouse.y);
-  g.stroke();
-
-  g.fillStyle = "#444"
+  g.fillStyle = "#CCC"
   g.font = "10px Consolas";
-  g.fillText("KeyPressed: " + (keys.length > 0 ? keys : "none"), 5, 10);
+  g.fillText("HeldKeys: " + (heldKeys.length > 0 ? heldKeys : "none"), 5, 10);
   g.fillText("MouseClick: " + (mouse.click != -1 ? mouse.click : "none"), 5, 20);
+  g.fillText("Direction: " + (p.moving ? p.dir : "none"), 5, 30);
 }
 
 // ## BACKGROUND METHOD ##

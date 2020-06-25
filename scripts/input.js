@@ -3,18 +3,26 @@
 window.addEventListener("keydown", keyPressed);
 window.addEventListener("keyup", keyReleased);
 
-var keys = [];
+var heldKeys = [];
+var pressedKeys = [];
 
 function keyPressed(e) {
-  if (!isKeyDown(e.keyCode)) keys.push(e.keyCode);
+  if (!isKeyHeld(e.keyCode)) {
+    heldKeys.push(e.keyCode);
+    pressedKeys.push(e.keyCode);
+  }
 }
 
 function keyReleased(e) {
-  keys.splice(keys.indexOf(e.keyCode), 1);
+  heldKeys.splice(heldKeys.indexOf(e.keyCode), 1);
 }
 
-function isKeyDown(k) {
-  return keys.includes(k);
+function isKeyHeld(k) {
+  return heldKeys.includes(k);
+}
+
+function isKeyPressed(k) {
+  return pressedKeys.includes(k);
 }
 
 // ## MOUSE INPUT ##

@@ -1,6 +1,7 @@
 body {
   background-color: #DDD;
   overflow: hidden;
+  font: 12px Consolas;
 }
 
 .header {
@@ -17,5 +18,5 @@ body {
   border-style: solid;
   border-color: #333;
 
-  cursor: crosshair;
+  /*cursor: crosshair;*/
 }

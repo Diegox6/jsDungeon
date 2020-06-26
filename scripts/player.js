@@ -35,7 +35,46 @@ function Player(x, y) {
     if (this.dir == 2 && this.moving) this.y += this.speed;
     if (this.dir == 3 && this.moving) this.x -= this.speed;
 
-    if (isKeyPressed(32)) console.log("attack");
+    if (isKeyPressed(32)) this.attack();
+  }
+
+  this.attack = function() {
+    console.log("attack");
+    var attackX = this.x;
+    var attackY = this.y;
+    var attackW = 0;
+    var attackH = 0;
+
+    switch (this.dir) {
+      case 0:
+        attackW = 20;
+        attackH = 40;
+        attackY -= attackH;
+        break;
+      case 1:
+        attackW = 40;
+        attackH = 20;
+        attackX += 20;
+        break;
+      case 2:
+        attackW = 20;
+        attackH = 40;
+        attackY += 20;
+        break;
+      case 3:
+        attackW = 40;
+        attackH = 20;
+        attackX -= attackW;
+        break;
+    }
+
+    g.fillStyle = "#FFF";
+    g.fillRect(attackX, attackY, attackW, attackH);
+
+    for (var i = 0; i < handler.size(); i++) {
+      var e = handler.getEntityAt(i);
+      if (intersect(attackX, attackY, attackW, attackH, e.x, e.y, 20, 20)) e.health--;
+    }
   }
 
 }
